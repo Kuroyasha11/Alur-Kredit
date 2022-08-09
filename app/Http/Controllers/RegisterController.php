@@ -14,7 +14,11 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        //
+        return view('register.index', [
+            'title' => 'Daftar Akun',
+            'judul' => 'Daftar Akun',
+            'request' => User::latest()->get()
+        ]);
     }
 
     /**

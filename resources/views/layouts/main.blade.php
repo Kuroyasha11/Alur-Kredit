@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title }} | PT BPR</title>
+    <title>{{ $title }} | PT Bank Perkreditan Rakyat</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -45,6 +45,11 @@
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     {{-- ICON BOOTSTRAP --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/assets/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -139,6 +144,50 @@
     {{-- Bootstrap 5.2 --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+    </script>
+
+
+    <!-- DataTables & Plugins -->
+    <script src="/assets/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/assets/adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/assets/adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/adminlte/plugins/jszip/jszip.min.js"></script>
+    <script src="/assets/adminlte/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="/assets/adminlte/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="/assets/adminlte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="/assets/adminlte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="/assets/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            $("#tabel-print").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": [
+                    "copy",
+                    // "csv",
+                    "excel",
+                    "pdf",
+                    "print",
+                    // "colvis"
+                ]
+            }).buttons().container().appendTo('#tabel-print_wrapper .col-md-6:eq(0)');
+            $('#tabel-biasa').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
     </script>
 </body>
 
