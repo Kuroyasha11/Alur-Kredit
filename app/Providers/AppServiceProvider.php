@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
+
+        Gate::define('admin', function (User $user) {
+            return $user->is_admin;
+        });
+
+        Gate::define('analis', function (User $user) {
+            return $user->is_analis;
+        });
+
+        Gate::define('komite', function (User $user) {
+            return $user->is_komite;
+        });
+
+        Gate::define('marketing', function (User $user) {
+            return $user->is_marketing;
+        });
+
+        Blade::directive('IDR', function ($rupiah) {
+            return "Rp<?php echo number_format($rupiah, 0); ?>";
+        });
     }
 }
