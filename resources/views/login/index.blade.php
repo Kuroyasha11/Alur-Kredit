@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="/assets/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/assets/adminlte/dist/css/adminlte.min.css">
+    {{-- Bootstrap 5.2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 
 <body class="hold-transition login-page">
@@ -22,7 +25,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="/assets/adminlte/index2.html" class="h1"><b>Login</b></a>
+                <a href="#" class="h1 text-decoration-none"><b>Login</b></a>
             </div>
             <div class="card-body">
                 @if (session()->has('gagal'))
@@ -98,6 +101,10 @@
     <script src="/assets/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/assets/adminlte/dist/js/adminlte.min.js"></script>
+    {{-- Bootstrap 5.2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

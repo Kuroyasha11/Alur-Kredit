@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index', [
+        'title' => 'Home',
+        'judul' => 'PT Bank Perkreditan Rakyat'
+    ]);
 })->middleware(['auth']);
 
 Route::controller(LoginController::class)->group(function () {
