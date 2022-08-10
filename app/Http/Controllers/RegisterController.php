@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -39,16 +40,35 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => ['required', 'min:3', 'max:25'],
+            'email' => ['required', 'email:dns', 'unique:users'],
+            'password' => ['required', 'min:8', 'max:20', 'confirmed']
+        ]);
+
+
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        User::create($validatedData);
+
+        if ($request->jabatan == 1) {
+            User::where('email', $validatedData['email'])->update(['is_marketing' => true]);
+        } elseif ($request->jabatan == 2) {
+            User::where('email', $validatedData['email'])->update(['is_analis' => true]);
+        } elseif ($request->jabatan == 3) {
+            User::where('email', $validatedData['email'])->update(['is_komite' => true]);
+        }
+        return redirect('/register')->with('berhasil', "Berhasil menambahkan akun " . $validatedData['name']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $register
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $register)
     {
         //
     }
@@ -56,10 +76,10 @@ class RegisterController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $register
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $register)
     {
         //
     }
@@ -68,10 +88,10 @@ class RegisterController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $register
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $register)
     {
         //
     }
@@ -79,11 +99,13 @@ class RegisterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $register
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $register)
     {
-        //
+        User::destroy($register->id);
+
+        return redirect('/register')->with('berhasil', 'Berhasil menghapus akun');
     }
 }

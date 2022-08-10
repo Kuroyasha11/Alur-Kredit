@@ -50,6 +50,7 @@
     <link rel="stylesheet" href="/assets/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="/assets/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="/assets/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -93,6 +94,12 @@
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
+                        @if (session()->has('berhasil'))
+                            <input type="hidden" id="toastbtnberhasil" value="berhasil">
+                        @endif
+                        @if (session()->has('gagal'))
+                            <input type="hidden" id="toastbtngagal" value="gagal">
+                        @endif
                         @yield('container')
                     </div>
                     <!-- /.row -->
@@ -137,15 +144,10 @@
     <script src="/assets/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/assets/adminlte/dist/js/adminlte.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="/assets/adminlte/dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="/assets/adminlte/dist/js/pages/dashboard.js"></script>
     {{-- Bootstrap 5.2 --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
     </script>
-
 
     <!-- DataTables & Plugins -->
     <script src="/assets/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -161,16 +163,16 @@
     <script src="/assets/adminlte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="/assets/adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-
     <!-- Page specific script -->
     <script>
         $(function() {
             $("#tabel-print").DataTable({
                 "responsive": true,
+                "pageLength": 10,
                 "lengthChange": false,
                 "autoWidth": false,
                 "buttons": [
-                    "copy",
+                    // "copy",
                     // "csv",
                     "excel",
                     "pdf",
@@ -180,6 +182,7 @@
             }).buttons().container().appendTo('#tabel-print_wrapper .col-md-6:eq(0)');
             $('#tabel-biasa').DataTable({
                 "paging": true,
+                "pageLength": 10,
                 "lengthChange": false,
                 "searching": true,
                 "ordering": true,
@@ -189,6 +192,65 @@
             });
         });
     </script>
+
+    {{-- Toast Berhasil --}}
+    <div class="toast-container position-static">
+        <div class="toast-container top-0 end-0 p-3">
+            <div id="toastberhasil" class="toast text-bg-success" role="alert" aria-live="assertive"
+                aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Pemberitahuan</strong>
+                    <small class="text-muted"></small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    {{ session('berhasil') }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            const toastLiveExample = document.getElementById('toastberhasil')
+
+            let toastbtnberhasil = $('#toastbtnberhasil').val()
+
+            if (toastbtnberhasil == 'berhasil') {
+                const toast = new bootstrap.Toast(toastLiveExample)
+
+                toast.show()
+            }
+        });
+    </script>
+    {{-- Toast Gagal --}}
+    <div class="toast-container position-static">
+        <div class="toast-container top-0 end-0 p-3">
+            <div id="toastgagal" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Pemberitahuan</strong>
+                    <small class="text-muted"></small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    {{ session('gagal') }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            const toastLiveExample = document.getElementById('toastgagal')
+
+            let toastbtngagal = $('#toastbtngagal').val()
+
+            if (toastbtngagal == 'gagal') {
+                const toast = new bootstrap.Toast(toastLiveExample)
+
+                toast.show()
+            }
+        });
+    </script>
+
 </body>
 
 </html>
