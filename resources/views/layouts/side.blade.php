@@ -38,42 +38,52 @@
                 <!-- Add icons to the links using the .nav-icon class
        with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
-                    <a href="/" class="nav-link text-decoration-none">
+                    <a href="/" class="nav-link text-decoration-none {{ Request::is('/') ? 'active' : '' }}">
                         <i class="bi bi-speedometer"></i>
                         <p>
                             Home
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-decoration-none">
-                        <i class="bi bi-credit-card-fill"></i>
-                        <p>
-                            Alur Kredit
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/register" class="nav-link">
-                                <i class="bi bi-person-plus-fill"></i>
-                                <p>Daftar User</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="./index2.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v2</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="./index3.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Dashboard v3</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @can('admin')
+                    <li class="nav-item">
+                        <a href="/register"
+                            class="nav-link text-decoration-none {{ Request::is('register*') ? 'active' : '' }}">
+                            <i class="bi bi-person-plus-fill"></i>
+                            <p>
+                                Daftar User
+                            </p>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a href="#"
+                            class="nav-link text-decoration-none {{ Request::is('marketing*') ? 'active' : '' }}">
+                            <i class="bi bi-credit-card-fill"></i>
+                            <p>
+                                Alur Kredit
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('marketing')
+                                <li class="nav-item">
+                                    <a href="/marketing"
+                                        class="nav-link text-decoration-none {{ Request::is('marketing*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pemohon Kredit</p>
+                                    </a>
+                                </li>
+                            @endcan
+                            <li class="nav-item">
+                                <a href="./index3.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Dashboard v3</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>

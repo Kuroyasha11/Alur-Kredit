@@ -19,39 +19,47 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($request as $user)
+                    @if ($request->count())
+                        @foreach ($request as $user)
+                            <tr>
+                                <td align="CENTER">
+                                    <b>
+                                        {{ $loop->iteration }}
+                                    </b>
+                                </td>
+                                <td>
+                                    {{ $user->name }}
+                                </td>
+                                <td>
+                                    @if ($user->is_admin == 1 && $user->is_analis == 0 && $user->is_komite == 0 && $user->is_marketing == 0)
+                                        <p>Admin</p>
+                                    @elseif ($user->is_admin == 0 && $user->is_analis == 1 && $user->is_komite == 0 && $user->is_marketing == 0)
+                                        <p>Analis</p>
+                                    @elseif ($user->is_admin == 0 && $user->is_analis == 0 && $user->is_komite == 1 && $user->is_marketing == 0)
+                                        <p>Komite</p>
+                                    @elseif ($user->is_admin == 0 && $user->is_analis == 0 && $user->is_komite == 0 && $user->is_marketing == 1)
+                                        <p>Marketing</p>
+                                    @endif
+                                </td>
+                                <td align="CENTER">
+                                    <form action="/register/{{ $user->id }}" method="post">
+                                        @method('delete')
+                                        @csrf
+                                        <button <abbr title="Delete" class="btn btn-danger mx-2"
+                                            onclick="return confirm('Are you sure?')">
+                                            <i class="bi bi-x-circle"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
                         <tr>
-                            <td align="CENTER">
-                                <b>
-                                    {{ $loop->iteration }}
-                                </b>
-                            </td>
-                            <td>
-                                {{ $user->name }}
-                            </td>
-                            <td>
-                                @if ($user->is_admin == 1 && $user->is_analis == 0 && $user->is_komite == 0 && $user->is_marketing == 0)
-                                    <p>Admin</p>
-                                @elseif ($user->is_admin == 0 && $user->is_analis == 1 && $user->is_komite == 0 && $user->is_marketing == 0)
-                                    <p>Analis</p>
-                                @elseif ($user->is_admin == 0 && $user->is_analis == 0 && $user->is_komite == 1 && $user->is_marketing == 0)
-                                    <p>Komite</p>
-                                @elseif ($user->is_admin == 0 && $user->is_analis == 0 && $user->is_komite == 0 && $user->is_marketing == 1)
-                                    <p>Marketing</p>
-                                @endif
-                            </td>
-                            <td align="CENTER">
-                                <form action="/register/{{ $user->id }}" method="post">
-                                    @method('delete')
-                                    @csrf
-                                    <button <abbr title="Delete" class="btn btn-danger mx-2"
-                                        onclick="return confirm('Are you sure?')">
-                                        <i class="bi bi-x-circle"></i>
-                                    </button>
-                                </form>
+                            <td colspan="4">
+                                <p class="text-center fs-4">Tidak ada daftar User</p>
                             </td>
                         </tr>
-                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

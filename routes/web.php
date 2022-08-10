@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,8 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/logout', 'logout');
 });
 
+// ADMIN
 Route::resource('/register', RegisterController::class)->middleware(['auth', 'admin']);
+
+// MARKETING
+Route::resource('/marketing', MarketingController::class)->middleware(['auth', 'marketing']);
