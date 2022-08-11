@@ -100,7 +100,6 @@
                                                 </div>
                                             @enderror
                                         </div>
-
                                         <div class="input-group mb-3">
                                             <label>Jabatan</label>
                                             <select class="form-select @error('jabatan') is-invalid @enderror"

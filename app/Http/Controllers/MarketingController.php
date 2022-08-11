@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applicant;
+use App\Models\Archive;
 use Illuminate\Http\Request;
 
 class MarketingController extends Controller
@@ -42,7 +43,35 @@ class MarketingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $rule1 = [
+        //     'nik' => ['required', 'numeric', 'digits:16'],
+        //     'nama' => ['required', 'min:3', 'max:25'],
+        //     'alamat' => ['required', 'max:100'],
+        //     'status' => ['required'],
+        //     'namainstansi' => ['required', 'min:3', 'max:100'],
+        //     'alamatinstansi' => ['required', 'max:100'],
+        //     'jabatan' => ['required'],
+        // ];
+
+        $rule2  = [
+            'image' => ['required', 'file', 'max:10240']
+        ];
+
+        // $validatedData1 = $request->validate($rule1);
+        $validatedData2 = $request->validate($rule2);
+
+
+        $data = $request->file('image');
+        $validatedData2['image'] = $request->file('image')->store('arsip');
+        // foreach ($data as $item) {
+        //     $validatedData2['applicant_id'] = 1;
+        //     $validatedData2['nik'] = 442460;
+        //     $validatedData2['image'] = $item->store('arsip');
+
+        // }
+        Archive::create($validatedData2);
+
+        return redirect('/marketing');
     }
 
     /**

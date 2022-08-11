@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Applicant extends Model
+class Archive extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    protected $with = ['archive'];
-
-    public function archive()
+    public function applicant()
     {
-        return $this->hasMany(Applicant::class);
+        return $this->belongsTo(Applicant::class);
     }
 }

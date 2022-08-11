@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Applicant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,16 +14,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('applicants', function (Blueprint $table) {
+        Schema::create('archives', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Applicant::class);
             $table->string('nik');
-            $table->string('nama');
-            $table->text('alamat');
-            $table->string('status');
-            $table->string('namainstansi');
-            $table->string('alamatinstansi');
-            $table->string('jabatan');
-            $table->boolean('submit')->default(false);
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('applicants');
+        Schema::dropIfExists('archives');
     }
 };
