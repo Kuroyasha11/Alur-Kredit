@@ -20,7 +20,7 @@ class MarketingController extends Controller
         return view('marketing.index', [
             'title' => 'Daftar Pemohon Kredit',
             'judul' => 'Daftar Pemohon Kredit',
-            'request' => Applicant::latest()->get()
+            'request' => Applicant::latest()->where('submit', 0)->where('selesai', 0)->get()
         ]);
     }
 
@@ -113,7 +113,11 @@ class MarketingController extends Controller
      */
     public function update(Request $request, Applicant $marketing)
     {
-        //
+        $validatedData = $request->validate([
+            'selesai' => 'required'
+        ]);
+
+        Applicant::where('id', $marketing->id)->update($validatedData);
     }
 
     /**

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('alamatinstansi');
             $table->string('jabatan');
             $table->boolean('submit')->default(false);
+            $table->boolean('selesai')->default(false);
             $table->timestamps();
         });
     }
