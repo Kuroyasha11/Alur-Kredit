@@ -110,7 +110,8 @@
 
                         <div class="card-footer">
                             <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                <button type="submit" class="btn btn-primary my-2 mx-2">Tambah</button>
+                                <a href="/marketing" class="btn btn-warning my-2 mx-2">Kembali</a>
                             </div>
                         </div>
                     </form>

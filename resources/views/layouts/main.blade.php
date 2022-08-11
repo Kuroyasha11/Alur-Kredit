@@ -61,6 +61,22 @@
             height: 250px;
             overflow: scroll;
         }
+
+        /* Image Fullscreen */
+        #fullpage {
+            display: none;
+            position: absolute;
+            z-index: 9999;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 40%;
+            background-size: contain;
+            background-repeat: no-repeat no-repeat;
+            background-position: center center;
+            background-color: black;
+        }
     </style>
 </head>
 
@@ -264,6 +280,19 @@
         });
     </script>
 
+    {{-- Fullscreen Image --}}
+    <script>
+        function getPics() {} //just for this demo
+        const imgs = document.querySelectorAll('.gallery img');
+        const fullPage = document.querySelector('#fullpage');
+
+        imgs.forEach(img => {
+            img.addEventListener('click', function() {
+                fullPage.style.backgroundImage = 'url(' + img.src + ')';
+                fullPage.style.display = 'block';
+            });
+        });
+    </script>
 </body>
 
 </html>

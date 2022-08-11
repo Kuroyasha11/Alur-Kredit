@@ -11,8 +11,9 @@ class Applicant extends Model
 
     protected $guarded = ['id'];
 
-    public function archive()
-    {
-        return $this->belongsTo(Applicant::class);
-    }
+
+    // public function archive()
+    // {
+    //     return $this->belongsTo(Applicant::class);
+    // }
 }

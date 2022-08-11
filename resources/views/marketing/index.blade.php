@@ -31,16 +31,18 @@
                                     {{ $applicant->nama }}
                                 </td>
                                 <td align="CENTER">
-                                    {{-- <a <abbr title="Show" href="/marketing/{{ $applicant->id }}" class="btn btn-info"><i
-                                            class="bi bi-eye-fill"></i></a>
-                                    <form action="/marketing/{{ $applicant->id }}" method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button <abbr title="Delete" class="btn btn-danger mx-2"
-                                            onclick="return confirm('Are you sure?')">
-                                            <i class="bi bi-x-circle"></i>
-                                        </button>
-                                    </form> --}}
+                                    <div class="d-flex">
+                                        <a <abbr title="Show" href="/marketing/{{ $applicant->id }}"
+                                            class="btn btn-info"><i class="bi bi-eye-fill mx-1"></i></a>
+                                        <form action="/marketing/{{ $applicant->id }}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <button <abbr title="Delete" class="btn btn-danger mx-2"
+                                                onclick="return confirm('Are you sure?')">
+                                                <i class="bi bi-x-circle"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

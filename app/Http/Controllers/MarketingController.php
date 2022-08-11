@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Applicant;
 use App\Models\Archive;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MarketingController extends Controller
 {
@@ -64,7 +66,7 @@ class MarketingController extends Controller
             foreach ($data as $item) {
                 $image = new Archive;
 
-                $path = $item->store('arsip');
+                $path = $item->store('arsip/' . Carbon::now()->isoFormat('DD MMMM Y'));
                 $image->image = $path;
                 $image->applicant_id = $cekid->id;
                 $image->nik = $cekid->nik;
@@ -84,7 +86,11 @@ class MarketingController extends Controller
      */
     public function show(Applicant $marketing)
     {
-        //
+        return view('marketing.show', [
+            'title' => 'Pemohon Kredit ' . $marketing->nama,
+            'judul' => 'Pemohon Kredit ' . $marketing->nama,
+            'request' => $marketing
+        ]);
     }
 
     /**
@@ -118,6 +124,10 @@ class MarketingController extends Controller
      */
     public function destroy(Applicant $marketing)
     {
-        //
+        Applicant::destroy($marketing->id);
+
+        Archive::where('applicant_id', $marketing->id)->delete();
+
+        return redirect('/marketing')->with('berhasil', 'Berhasil menghapus data pemohon');
     }
 }

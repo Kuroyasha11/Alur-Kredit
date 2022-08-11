@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('archives', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Applicant::class);
+            $table->string('applicant_id');
             $table->string('nik');
             $table->string('image');
             $table->timestamps();
