@@ -84,8 +84,10 @@
                                 @enderror
                             </div>
                             <hr>
-                            <div class="col-sm-5">
-                                <div class="card gallery"></div>
+                            <div class="scroll">
+                                <div class="col-sm-10">
+                                    <div class="card gallery"></div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="image">Scan Persyaratan</label>
@@ -96,6 +98,11 @@
                                         <label class="custom-file-label" for="image">Pilih file</label>
                                     </div>
                                 </div>
+                                @error('image')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                         </div>

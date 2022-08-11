@@ -51,6 +51,17 @@
     <link rel="stylesheet" href="/assets/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="/assets/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
+    <style>
+        .scroll {
+            display: block;
+            border: 1px solid black;
+            padding: 5px;
+            margin-top: 5px;
+            width: 45%;
+            height: 250px;
+            overflow: scroll;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

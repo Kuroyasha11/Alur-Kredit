@@ -11,8 +11,10 @@ class Archive extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['applicant'];
+
     public function applicant()
     {
-        return $this->belongsTo(Applicant::class);
+        return $this->hasOne(Applicant::class);
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('applicants', function (Blueprint $table) {
             $table->id();
-            $table->string('nik');
+            $table->string('nik')->unique();
             $table->string('nama');
             $table->text('alamat');
             $table->string('status');

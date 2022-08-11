@@ -43,35 +43,37 @@ class MarketingController extends Controller
      */
     public function store(Request $request)
     {
-        // $rule1 = [
-        //     'nik' => ['required', 'numeric', 'digits:16'],
-        //     'nama' => ['required', 'min:3', 'max:25'],
-        //     'alamat' => ['required', 'max:100'],
-        //     'status' => ['required'],
-        //     'namainstansi' => ['required', 'min:3', 'max:100'],
-        //     'alamatinstansi' => ['required', 'max:100'],
-        //     'jabatan' => ['required'],
-        // ];
-
-        $rule2  = [
-            'image' => ['required', 'file', 'max:10240']
+        $rule1 = [
+            'nik' => ['required', 'numeric', 'digits:16', 'unique:applicants'],
+            'nama' => ['required', 'min:3', 'max:25'],
+            'alamat' => ['required', 'max:100'],
+            'status' => ['required'],
+            'namainstansi' => ['required', 'min:3', 'max:100'],
+            'alamatinstansi' => ['required', 'max:100'],
+            'jabatan' => ['required'],
         ];
 
-        // $validatedData1 = $request->validate($rule1);
-        $validatedData2 = $request->validate($rule2);
+        $validatedData1 = $request->validate($rule1);
 
+        Applicant::insert($validatedData1);
 
-        $data = $request->file('image');
-        $validatedData2['image'] = $request->file('image')->store('arsip');
-        // foreach ($data as $item) {
-        //     $validatedData2['applicant_id'] = 1;
-        //     $validatedData2['nik'] = 442460;
-        //     $validatedData2['image'] = $item->store('arsip');
+        if ($request->file('image')) {
+            $cekid = Applicant::all()->where('nik', $validatedData1['nik'])->where('nama', $validatedData1['nama'])->first();
 
-        // }
-        Archive::create($validatedData2);
+            $data = $request->file('image');
+            foreach ($data as $item) {
+                $image = new Archive;
 
-        return redirect('/marketing');
+                $path = $item->store('arsip');
+                $image->image = $path;
+                $image->applicant_id = $cekid->id;
+                $image->nik = $cekid->nik;
+
+                $image->save();
+            }
+        }
+
+        return redirect('/marketing')->with('berhasil', 'Berhasil menambah pemohon ' . $validatedData1['nama']);
     }
 
     /**

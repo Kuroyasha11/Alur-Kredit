@@ -11,10 +11,8 @@ class Applicant extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = ['archive'];
-
     public function archive()
     {
-        return $this->hasMany(Applicant::class);
+        return $this->belongsTo(Applicant::class);
     }
 }
