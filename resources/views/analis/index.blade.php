@@ -2,9 +2,9 @@
 
 @section('container')
     <div class="col-lg-15">
-        <div class="d-flex justify-content-start my-2">
-            <a href="/marketing/create" class="btn btn-success">Tambah</a>
-        </div>
+        {{-- <div class="d-flex justify-content-start my-2">
+            <a href="/analis/create" class="btn btn-success">Tambah</a>
+        </div> --}}
         <div class="table-responsive">
             <table class="table table-hover table-bordered" id="tabel-biasa">
                 <thead>
@@ -31,7 +31,7 @@
                                     {{ $applicant->nama }}
                                 </td>
                                 <td align="CENTER">
-                                    <a <abbr title="Show" href="/marketing/{{ $applicant->id }}" class="btn btn-info"><i
+                                    <a <abbr title="Show" href="/analis/{{ $applicant->id }}" class="btn btn-info"><i
                                             class="bi bi-eye-fill mx-1"></i></a>
                                 </td>
                             </tr>

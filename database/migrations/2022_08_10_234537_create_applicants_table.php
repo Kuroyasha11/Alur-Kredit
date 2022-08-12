@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('namainstansi');
             $table->string('alamatinstansi');
             $table->string('jabatan');
-            $table->boolean('submit')->default(false);
+            $table->boolean('submimarketingt')->default(false);
+            $table->boolean('submitanalis')->default(false);
             $table->boolean('selesai')->default(false);
             $table->timestamps();
         });

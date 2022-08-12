@@ -4,7 +4,8 @@
     <div class="col-lg-15">
         <div class="row">
             <div class="d-flex justify-content-start">
-                <form action="/marketing/{{ $request->id }}" method="post">
+                <a href="/analis/create" class="btn btn-success">Analis</a>
+                {{-- <form action="/analis/{{ $request->id }}" method="post">
                     @method('put')
                     @csrf
                     <input type="hidden" name="submit" value="1">
@@ -12,13 +13,13 @@
                         <i class="bi bi-check-lg"></i>
                     </button>
                 </form>
-                <form action="/marketing/{{ $request->id }}" method="post">
+                <form action="/analis/{{ $request->id }}" method="post">
                     @method('delete')
                     @csrf
                     <button <abbr title="Delete" class="btn btn-danger mx-2" onclick="return confirm('Are you sure?')">
                         <i class="bi bi-x-circle"></i>
                     </button>
-                </form>
+                </form> --}}
             </div>
             <div class="table-responsive col-lg-15 mb-5">
                 <table class="table table-sm">
@@ -77,7 +78,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a href="/marketing" class="btn btn-warning my-2 mx-2">Kembali</a>
+                    <a href="/analis" class="btn btn-warning my-2 mx-2">Kembali</a>
                 </div>
                 <div id="fullpage" onclick="this.style.display='none';"></div>
             </div>

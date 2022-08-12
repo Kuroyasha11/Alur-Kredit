@@ -6,11 +6,11 @@
             <div class="mx-3 my-3">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Form Pemohon Kredit</h3>
+                        <h3 class="card-title">Analis Pemohon Kredit</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="/marketing" method="post" enctype="multipart/form-data">
+                    <form action="/analis" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
@@ -111,7 +111,7 @@
                         <div class="card-footer">
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary my-2 mx-2">Tambah</button>
-                                <a href="/marketing" class="btn btn-warning my-2 mx-2">Kembali</a>
+                                <a href="/analis" class="btn btn-warning my-2 mx-2">Kembali</a>
                             </div>
                         </div>
                     </form>

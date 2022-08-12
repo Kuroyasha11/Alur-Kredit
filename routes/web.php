@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalisController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\RegisterController;
@@ -23,6 +24,7 @@ Route::get('/', function () {
     ]);
 })->middleware(['auth']);
 
+// LOGIN
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login');
     Route::post('/login', 'authenticate');
@@ -34,3 +36,6 @@ Route::resource('/register', RegisterController::class)->middleware(['auth', 'ad
 
 // MARKETING
 Route::resource('/marketing', MarketingController::class)->middleware(['auth', 'marketing']);
+
+// ANALIS
+Route::resource('/analis', AnalisController::class)->middleware(['auth', 'analis']);

@@ -7,8 +7,6 @@ use App\Models\Applicant;
 use App\Models\Archive;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Queue\Events\Looping;
-use Illuminate\Support\Facades\Storage;
 
 class MarketingController extends Controller
 {
@@ -124,10 +122,12 @@ class MarketingController extends Controller
     public function update(Request $request, Applicant $marketing)
     {
         $validatedData = $request->validate([
-            'selesai' => 'required'
+            'submit' => 'required'
         ]);
 
         Applicant::where('id', $marketing->id)->update($validatedData);
+
+        return redirect('/marketing')->with('berhasil', 'Berhasil mengirim data pemohon ke analis');
     }
 
     /**
