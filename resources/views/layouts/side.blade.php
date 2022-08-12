@@ -58,7 +58,7 @@
                 @else
                     <li class="nav-item">
                         <a href="#"
-                            class="nav-link text-decoration-none {{ Request::is('marketing*') ? 'active' : '' }}">
+                            class="nav-link text-decoration-none {{ Request::is('marketing*') ? 'active' : '' }} {{ Request::is('analis*') ? 'active' : '' }}">
                             <i class="bi bi-credit-card-fill"></i>
                             <p>
                                 Alur Kredit
@@ -70,6 +70,14 @@
                                 <li class="nav-item">
                                     <a href="/marketing"
                                         class="nav-link text-decoration-none {{ Request::is('marketing*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pemohon Kredit</p>
+                                    </a>
+                                </li>
+                            @elsecan('analis')
+                                <li class="nav-item">
+                                    <a href="/analis"
+                                        class="nav-link text-decoration-none {{ Request::is('analis*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Pemohon Kredit</p>
                                     </a>

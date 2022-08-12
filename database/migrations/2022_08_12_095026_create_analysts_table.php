@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Analyst;
+use App\Models\Applicant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,17 +14,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('applicants', function (Blueprint $table) {
+        Schema::create('analysts', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Applicant::class);
             $table->string('nik')->unique();
-            $table->string('nama');
-            $table->text('alamat');
-            $table->string('status');
-            $table->string('namainstansi');
-            $table->string('alamatinstansi');
-            $table->string('jabatan');
-            $table->boolean('submit')->default(false);
-            $table->boolean('selesai')->default(false);
+            $table->bigInteger('gaji')->nullable();
+            $table->bigInteger('biaya')->nullable();
+            $table->bigInteger('kewajiban')->nullable();
+            $table->bigInteger('plafon')->nullable();
+            $table->integer('tenor')->nullable();
+            $table->integer('angsuran')->nullable();
             $table->timestamps();
         });
     }
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('applicants');
+        Schema::dropIfExists('analysts');
     }
 };

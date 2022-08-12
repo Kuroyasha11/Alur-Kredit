@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Analyst;
 use App\Models\Applicant;
 use App\Models\Archive;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Queue\Events\Looping;
 use Illuminate\Support\Facades\Storage;
 
 class MarketingController extends Controller
@@ -46,6 +48,7 @@ class MarketingController extends Controller
     public function store(Request $request)
     {
         $rule1 = [
+            'analyst_id' => ['nullable'],
             'nik' => ['required', 'numeric', 'digits:16', 'unique:applicants'],
             'nama' => ['required', 'min:3', 'max:25'],
             'alamat' => ['required', 'max:100'],
@@ -55,18 +58,25 @@ class MarketingController extends Controller
             'jabatan' => ['required'],
         ];
 
-        $validatedData1 = $request->validate($rule1);
+        $rule2 = [
+            'nik' => ['required', 'numeric', 'digits:16', 'unique:analysts'],
+        ];
 
-        Applicant::insert($validatedData1);
+        $validatedData1 = $request->validate($rule1);
+        Applicant::create($validatedData1);
+
+        $cekid = Applicant::all()->where('nik', $validatedData1['nik'])->where('nama', $validatedData1['nama'])->first();
+
+        $validatedData2 = $request->validate($rule2);
+        $validatedData2['applicant_id'] = $cekid->id;
+        Analyst::create($validatedData2);
 
         if ($request->file('image')) {
-            $cekid = Applicant::all()->where('nik', $validatedData1['nik'])->where('nama', $validatedData1['nama'])->first();
 
             $data = $request->file('image');
             foreach ($data as $item) {
                 $image = new Archive;
-
-                $path = $item->store('arsip/' . Carbon::now()->isoFormat('DD MMMM Y'));
+                $path = $item->store('arsip/' . Carbon::now()->isoFormat('DD MMMM Y') . '/' . $validatedData1['nik']);
                 $image->image = $path;
                 $image->applicant_id = $cekid->id;
                 $image->nik = $cekid->nik;
@@ -129,8 +139,8 @@ class MarketingController extends Controller
     public function destroy(Applicant $marketing)
     {
         Applicant::destroy($marketing->id);
-
         Archive::where('applicant_id', $marketing->id)->delete();
+        Analyst::where('applicant_id', $marketing->id)->delete();
 
         return redirect('/marketing')->with('berhasil', 'Berhasil menghapus data pemohon');
     }

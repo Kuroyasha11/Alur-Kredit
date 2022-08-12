@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Applicant extends Model
+class Analyst extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
-    protected $with = ['analyst'];
 
-    public function analyst()
+    public function applicant()
     {
-        return $this->hasOne(Analyst::class);
+        return $this->belongsTo(Applicant::class);
     }
 }
