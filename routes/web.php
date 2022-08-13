@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AnalisController;
+use App\Http\Controllers\Komite1Controller;
+use App\Http\Controllers\Komite2Controller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\RegisterController;
@@ -39,3 +41,9 @@ Route::resource('/marketing', MarketingController::class)->middleware(['auth', '
 
 // ANALIS
 Route::resource('/analis', AnalisController::class)->middleware(['auth', 'analis']);
+
+// KOMITE
+// MANAJER
+Route::resource('/manajer', Komite1Controller::class)->middleware(['auth', 'komite1']);
+// DIRUT
+Route::resource('/dirut', Komite2Controller::class)->middleware(['auth', 'komite2']);
