@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Analyst;
 use App\Models\Applicant;
+use App\Models\Archive;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AnalisController extends Controller
 {
@@ -29,10 +31,7 @@ class AnalisController extends Controller
      */
     public function create()
     {
-        return view('analis.create', [
-            'title' => 'Analis Pemohon Kredit',
-            'judul' => 'Analis Pemohon Kredit',
-        ]);
+        //
     }
 
     /**
@@ -54,6 +53,7 @@ class AnalisController extends Controller
      */
     public function show(Applicant $anali)
     {
+        Session::put('show', request()->fullUrl());
         return view('analis.show', [
             'title' => 'Pemohon Kredit ' . $anali->nama,
             'judul' => 'Pemohon Kredit ' . $anali->nama,
@@ -81,7 +81,47 @@ class AnalisController extends Controller
      */
     public function update(Request $request, Analyst $anali)
     {
-        //
+        if ($request->input == 1) {
+            // Penghasilan
+            $rule1 = [
+                'gaji' => ['required', 'numeric', 'min:1'],
+                'biaya' => ['required', 'numeric', 'min:1'],
+                'kewajiban' => ['required', 'numeric', 'min:1'],
+            ];
+
+            $validatedData1 = $request->validate($rule1);
+
+            Analyst::where('id', $anali->id)->update($validatedData1);
+        } elseif ($request->input == 2) {
+            // Permohonan
+            $rule1 = [
+                'plafon' => ['required', 'numeric', 'min:1'],
+                'tenor' => ['required', 'numeric', 'min:1'],
+                'angsuran' => ['required', 'numeric', 'min:1'],
+            ];
+
+            $validatedData1 = $request->validate($rule1);
+
+            Analyst::where('id', $anali->id)->update($validatedData1);
+        } elseif ($request->submitanalis == 1) {
+            $validatedData = $request->validate([
+                'submitanalis' => 'required'
+            ]);
+
+            Applicant::where('id', $anali->applicant_id)->update($validatedData);
+
+            return redirect('/analis')->with('berhasil', 'Berhasil mengirim data pemohon ke komite');
+        } elseif ($request->submitmarketing == 0) {
+            $validatedData = $request->validate([
+                'submitmarketing' => 'required'
+            ]);
+
+            Applicant::where('id', $anali->applicant_id)->update($validatedData);
+
+            return redirect('/analis')->with('berhasil', 'Berhasil mengirim data pemohon ke Marketing');
+        }
+
+        return redirect(session('show'))->with('berhasil', 'Berhasil memperbarui informasi pemohon');
     }
 
     /**
@@ -93,5 +133,16 @@ class AnalisController extends Controller
     public function destroy(Analyst $anali)
     {
         //
+    }
+
+    public function inputdata(Request $inputdata)
+    {
+        return view('analis.inputdata', [
+            'title' => 'Analis Pemohon Kredit',
+            'judul' => 'Analis Pemohon Kredit',
+            'request' => $inputdata,
+            'analis' => Analyst::all()->where('applicant_id', $inputdata->id)->first(),
+            'arsip' => Archive::where('applicant_id', $inputdata->id)
+        ]);
     }
 }

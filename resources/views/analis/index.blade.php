@@ -28,7 +28,16 @@
                                     {{ $applicant->nik }}
                                 </td>
                                 <td>
-                                    {{ $applicant->nama }}
+                                    @php
+                                        $total = $applicant->analyst->gaji - $applicant->analyst->biaya - $applicant->analyst->kewajiban;
+                                    @endphp
+                                    {{ $applicant->nama }} @if ($applicant->analyst->gaji != null && $applicant->analyst->angsuran != null)
+                                        @if ($total > $applicant->analyst->angsuran)
+                                            <span class="badge text-bg-success">APPROVE</span>
+                                        @elseif ($total < $applicant->analyst->angsuran)
+                                            <span class="badge text-bg-danger">REJECT</span>
+                                        @endif
+                                    @endif
                                 </td>
                                 <td align="CENTER">
                                     <a <abbr title="Show" href="/analis/{{ $applicant->id }}" class="btn btn-info"><i
