@@ -35,18 +35,18 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 // ADMIN
-Route::resource('/register', RegisterController::class)->middleware(['auth', 'admin']);
+Route::resource('/register', RegisterController::class)->only(['index', 'store', 'destroy'])->middleware(['auth', 'admin']);
 // ARSIP
-Route::resource('/arsip', ArsipController::class)->middleware(['auth', 'admin']);
+Route::resource('/arsip', ArsipController::class)->only(['index', 'show'])->middleware(['auth', 'admin']);
 
 // MARKETING
-Route::resource('/marketing', MarketingController::class)->middleware(['auth', 'marketing']);
+Route::resource('/marketing', MarketingController::class)->except(['edit'])->middleware(['auth', 'marketing']);
 
 // ANALIS
-Route::resource('/analis', AnalisController::class)->middleware(['auth', 'analis']);
+Route::resource('/analis', AnalisController::class)->only(['index', 'show', 'update'])->middleware(['auth', 'analis']);
 
 // KOMITE
 // MANAJER
-Route::resource('/manajer', Komite1Controller::class)->middleware(['auth', 'komite1']);
+Route::resource('/manajer', Komite1Controller::class)->only(['index', 'show', 'update'])->middleware(['auth', 'komite1']);
 // DIRUT
-Route::resource('/dirut', Komite2Controller::class)->middleware(['auth', 'komite2']);
+Route::resource('/dirut', Komite2Controller::class)->only(['index', 'show', 'update'])->middleware(['auth', 'komite2']);

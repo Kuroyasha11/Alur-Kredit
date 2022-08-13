@@ -134,15 +134,4 @@ class AnalisController extends Controller
     {
         //
     }
-
-    public function inputdata(Request $inputdata)
-    {
-        return view('analis.inputdata', [
-            'title' => 'Analis Pemohon Kredit',
-            'judul' => 'Analis Pemohon Kredit',
-            'request' => $inputdata,
-            'analis' => Analyst::all()->where('applicant_id', $inputdata->id)->first(),
-            'arsip' => Archive::where('applicant_id', $inputdata->id)
-        ]);
-    }
 }
