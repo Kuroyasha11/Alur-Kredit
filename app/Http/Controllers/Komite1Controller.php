@@ -95,7 +95,7 @@ class Komite1Controller extends Controller
 
             Applicant::where('id', $manajer->id)->update($validatedData);
 
-            return redirect('/manajer')->with('berhasil', 'Data pemohon telah di approve, silahkan cek menu arsip');
+            return redirect('/manajer')->with('berhasil', 'Data pemohon telah di approve dan akan tersimpan di admin');
         } elseif ($request->submitanalis == 0) {
             $validatedData = $request->validate([
                 'submitanalis' => 'required'

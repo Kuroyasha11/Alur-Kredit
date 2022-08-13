@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnalisController;
+use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\Komite1Controller;
 use App\Http\Controllers\Komite2Controller;
 use App\Http\Controllers\LoginController;
@@ -35,6 +36,8 @@ Route::controller(LoginController::class)->group(function () {
 
 // ADMIN
 Route::resource('/register', RegisterController::class)->middleware(['auth', 'admin']);
+// ARSIP
+Route::resource('/arsip', ArsipController::class)->middleware(['auth', 'admin']);
 
 // MARKETING
 Route::resource('/marketing', MarketingController::class)->middleware(['auth', 'marketing']);

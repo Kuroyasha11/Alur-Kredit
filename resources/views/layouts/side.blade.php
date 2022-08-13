@@ -54,6 +54,14 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/arsip" class="nav-link text-decoration-none {{ Request::is('arsip*') ? 'active' : '' }}">
+                            <i class="bi bi-archive-fill"></i>
+                            <p>
+                                Arsip Permohonan
+                            </p>
+                        </a>
+                    </li>
                 @else
                     <li class="nav-item">
                         <a href="#"
