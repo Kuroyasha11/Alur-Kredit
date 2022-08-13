@@ -7,7 +7,7 @@
                 <form action="/marketing/{{ $request->id }}" method="post">
                     @method('put')
                     @csrf
-                    <input type="hidden" name="submit" value="1">
+                    <input type="hidden" name="submitmarketing" value="1">
                     <button <abbr title="Submit" class="btn btn-success" onclick="return confirm('Are you sure?')">
                         <i class="bi bi-check-lg"></i>
                     </button>

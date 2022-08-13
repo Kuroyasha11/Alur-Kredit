@@ -37,8 +37,12 @@ class AppServiceProvider extends ServiceProvider
             return $user->is_analis;
         });
 
-        Gate::define('komite', function (User $user) {
-            return $user->is_komite;
+        Gate::define('komite1', function (User $user) {
+            return $user->is_komite1;
+        });
+
+        Gate::define('komite2', function (User $user) {
+            return $user->is_komite2;
         });
 
         Gate::define('marketing', function (User $user) {

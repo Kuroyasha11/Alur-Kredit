@@ -55,7 +55,9 @@ class RegisterController extends Controller
         } elseif ($request->jabatan == 2) {
             User::where('email', $validatedData['email'])->update(['is_analis' => true]);
         } elseif ($request->jabatan == 3) {
-            User::where('email', $validatedData['email'])->update(['is_komite' => true]);
+            User::where('email', $validatedData['email'])->update(['is_komite1' => true]);
+        } elseif ($request->jabatan == 4) {
+            User::where('email', $validatedData['email'])->update(['is_komite2' => true]);
         }
         return redirect('/register')->with('berhasil', "Berhasil menambahkan akun " . $validatedData['name']);
     }

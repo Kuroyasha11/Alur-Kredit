@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsKomiteKredit
+class IsKomiteKredit2
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class IsKomiteKredit
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->check() || !auth()->user()->is_komite1) {
+        if (!auth()->check() || !auth()->user()->is_komite2) {
             abort(403);
         }
 

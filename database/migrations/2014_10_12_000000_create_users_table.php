@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->boolean('is_admin')->default(false);
             $table->boolean('is_analis')->default(false);
-            $table->boolean('is_komite')->default(false);
+            $table->boolean('is_komite1')->default(false);
+            $table->boolean('is_komite2')->default(false);
             $table->boolean('is_marketing')->default(false);
             $table->string('name');
             $table->string('email')->unique();

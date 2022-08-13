@@ -42,9 +42,15 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('Ricky4424')
         ]);
         User::create([
-            'is_komite' => true,
+            'is_komite1' => true,
             'name' => "Ricky Andrean",
             'email' => "Kuroyasha3@gmail.com",
+            'password' => bcrypt('Ricky4424')
+        ]);
+        User::create([
+            'is_komite2' => true,
+            'name' => "Ricky Andrean",
+            'email' => "Kuroyasha4@gmail.com",
             'password' => bcrypt('Ricky4424')
         ]);
     }

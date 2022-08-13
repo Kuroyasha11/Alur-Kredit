@@ -18,7 +18,7 @@ class AnalisController extends Controller
         return view('analis.index', [
             'title' => 'Daftar Pemohon Kredit',
             'judul' => 'Daftar Pemohon Kredit',
-            'request' => Applicant::latest()->where('submit', 1)->where('selesai', 0)->get()
+            'request' => Applicant::latest()->where('submitmarketing', 1)->where('submitanalis', 0)->where('selesaimanajer', 0)->where('selesaidirut', 0)->get()
         ]);
     }
 

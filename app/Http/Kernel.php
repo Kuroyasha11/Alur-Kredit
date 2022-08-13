@@ -65,7 +65,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\IsAdmin::class,
         'analis' => \App\Http\Middleware\IsAnalisKredit::class,
-        'komite' => \App\Http\Middleware\IsKomiteKredit::class,
+        'komite1' => \App\Http\Middleware\IsKomiteKredit::class,
+        'komite2' => \App\Http\Middleware\IsKomiteKredit2::class,
         'marketing' => \App\Http\Middleware\IsMarketing::class,
     ];
 }

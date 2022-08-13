@@ -31,13 +31,35 @@
                                     {{ $user->name }}
                                 </td>
                                 <td>
-                                    @if ($user->is_admin == 1 && $user->is_analis == 0 && $user->is_komite == 0 && $user->is_marketing == 0)
+                                    @if ($user->is_admin == 1 &&
+                                        $user->is_analis == 0 &&
+                                        $user->is_komite1 == 0 &&
+                                        $user->is_komite2 == 0 &&
+                                        $user->is_marketing == 0)
                                         <p>Admin</p>
-                                    @elseif ($user->is_admin == 0 && $user->is_analis == 1 && $user->is_komite == 0 && $user->is_marketing == 0)
+                                    @elseif ($user->is_admin == 0 &&
+                                        $user->is_analis == 1 &&
+                                        $user->is_komite1 == 0 &&
+                                        $user->is_komite2 == 0 &&
+                                        $user->is_marketing == 0)
                                         <p>Analis</p>
-                                    @elseif ($user->is_admin == 0 && $user->is_analis == 0 && $user->is_komite == 1 && $user->is_marketing == 0)
-                                        <p>Komite</p>
-                                    @elseif ($user->is_admin == 0 && $user->is_analis == 0 && $user->is_komite == 0 && $user->is_marketing == 1)
+                                    @elseif ($user->is_admin == 0 &&
+                                        $user->is_analis == 0 &&
+                                        $user->is_komite1 == 1 &&
+                                        $user->is_komite2 == 0 &&
+                                        $user->is_marketing == 0)
+                                        <p>Komite Manajer</p>
+                                    @elseif ($user->is_admin == 0 &&
+                                        $user->is_analis == 0 &&
+                                        $user->is_komite1 == 0 &&
+                                        $user->is_komite2 == 1 &&
+                                        $user->is_marketing == 0)
+                                        <p>Komite Dirut</p>
+                                    @elseif ($user->is_admin == 0 &&
+                                        $user->is_analis == 0 &&
+                                        $user->is_komite1 == 0 &&
+                                        $user->is_komite2 == 0 &&
+                                        $user->is_marketing == 1)
                                         <p>Marketing</p>
                                     @endif
                                 </td>
@@ -106,7 +128,8 @@
                                                 style="width: 100%;" name="jabatan">
                                                 <option selected value="1">AO / Marketing</option>
                                                 <option value="2">Analis Kredit</option>
-                                                <option value="3">Komite Kredit</option>
+                                                <option value="3">Komite Manajer</option>
+                                                <option value="4">Komite Dirut</option>
                                             </select>
                                         </div>
                                         <div class="input-group mb-3">

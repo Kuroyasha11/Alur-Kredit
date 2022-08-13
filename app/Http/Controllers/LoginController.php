@@ -29,7 +29,11 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return redirect()->intended('/');
-        } elseif (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password'], 'is_komite' => 1])) {
+        } elseif (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password'], 'is_komite1' => 1])) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/');
+        } elseif (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password'], 'is_komite2' => 1])) {
             $request->session()->regenerate();
 
             return redirect()->intended('/');
