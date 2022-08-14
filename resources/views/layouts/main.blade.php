@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }} | PT Bank Perkreditan Rakyat</title>
+    <link rel="icon" href="/assets/image/download.jpg">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
