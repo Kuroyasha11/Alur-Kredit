@@ -198,7 +198,7 @@
         $(function() {
             $("#tabel-print").DataTable({
                 "responsive": true,
-                "pageLength": 10,
+                "pageLength": 100,
                 "lengthChange": false,
                 "autoWidth": false,
                 "buttons": [
